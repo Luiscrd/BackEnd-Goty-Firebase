@@ -55,4 +55,28 @@ app.get('/goty', async(req, res) => {
 
 })
 
+app.post('/goty/:id', async(req, res) => {
+
+    const id = req.params.id;
+
+    const gameRef = db.collection('goty').doc(id);
+
+    const gameSnap = await gameRef.get();
+
+    if (!gameSnap.exists) {
+
+        res.status(400).json({
+            ok: false,
+            msg: 'Id not valid'
+        });
+    }
+
+
+    res.json({
+        ok: true,
+        game: gameSnap
+    });
+
+})
+
 exports.api = functions.https.onRequest(app);
