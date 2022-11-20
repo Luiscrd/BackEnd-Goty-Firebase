@@ -3,4 +3,4 @@
 </p>
 
 # BackEnd-Goty-Firebase
-BackEnd para la aplicación Game of the Year reado en firebase.
+BackEnd para la aplicación Game of the Year creado en firebase.
