@@ -12,7 +12,7 @@ admin.initializeApp({
 const db = admin.firestore();
 
 // const goty = functions.https.onRequest( async(request, response) => {
-   
+
 //     // const id = request.params['0'];
 
 //     const gotyRef = db.collection('goty');
@@ -39,7 +39,7 @@ const app = express();
 
 app.use(cors({ origin: true }));
 
-app.get('/goty', async(req, res) => {
+app.get('/goty', async (req, res) => {
 
     const gotyRef = db.collection('goty');
 
@@ -55,7 +55,7 @@ app.get('/goty', async(req, res) => {
 
 })
 
-app.post('/goty/:id', async(req, res) => {
+app.post('/goty/:id', async (req, res) => {
 
     const id = req.params.id;
 
@@ -67,14 +67,19 @@ app.post('/goty/:id', async(req, res) => {
 
         res.status(400).json({
             ok: false,
-            msg: 'Id not valid'
+            msg: 'Id no Valido'
         });
     }
 
+    const before = gameSnap.data();
+
+    await gameRef.update({
+        votos: before.votos + 1
+    })
 
     res.json({
         ok: true,
-        game: gameSnap
+        msg: `Garcias por tu voto a ${before.name}`,
     });
 
 })
